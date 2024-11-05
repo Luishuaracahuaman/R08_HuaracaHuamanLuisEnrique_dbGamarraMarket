@@ -100,9 +100,17 @@ foreign key (prenda_id) references PRENDA(id)
 );
 
 
-/* Insertar datos a la tabla VENTA DETALLE */
-INSERT INTO VENTA_DETALLE (cantidad, venta_id, prenda_id) 
-VALUES (2, 1, 1);
+-- Insertar datos en la tabla VENTA_DETALLE
+INSERT INTO VENTA_DETALLE (id, cantidad, venta_id, prenda_id) VALUES
+(1, 2, 1, 1),  -- 2 pantalones jean
+(2, 1, 1, 2),  -- 1 camisa
+(3, 3, 2, 3),  -- 3 polos
+(4, 1, 3, 4),  -- 1 vestido
+(5, 2, 3, 5),  -- 2 casacas
+(6, 1, 4, 6),  -- 1 falda
+(7, 1, 4, 2),  -- 1 camisa
+(8, 2, 5, 1),  -- 2 pantalones jean
+(9, 1, 5, 3);  -- 1 polo
 
 /*SELECION DE TABLAS*/
 
