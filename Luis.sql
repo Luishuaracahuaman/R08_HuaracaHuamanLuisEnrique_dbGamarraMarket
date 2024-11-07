@@ -1,130 +1,73 @@
-/* Crear base de datos dbGamarraMarket */
-CREATE DATABASE dbGamarraMarket
-default character SET utf8;
+-- Eliminar base de datos
+DROP DATABASE Record;
 
-/* Poner en uso la base de datos dbGamarraMarket */
-USE dbGamarraMarket;
+-- Crear base de datos
 
-/* Crear la tabla CLIENTE */
-CREATE TABLE CLIENTE(
-    id int auto_increment primary key,
-    tipo_documento char(3),
-    numero_documento char(9),
-    nombres varchar(60),
-    apellidos varchar(90),
-    email varchar(80),
-    celular char(9),
-    fecha_nacimiento date,
-    activo bool
+CREATE DATABASE Record; 
+
+-- Usar base de datos
+
+USE Record;
+
+-- Crear tabla Consulta
+
+CREATE TABLE Queries (
+    identifier INT AUTO_INCREMENT PRIMARY KEY , 
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    cellphone CHAR(9) NOT NULL,
+    message VARCHAR(200),
+    date_hour DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insertar datos en la tabla CLIENTE
-INSERT INTO CLIENTE (id, tipo_documento, numero_documento, nombres, apellidos, email, celular, fecha_nacimiento, activo) VALUES
-(1, 'DNI', '45678912', 'Juan Carlos', 'Pérez Gómez', 'juan.perez@gmail.com', '987654321', '1990-05-15', true),
-(2, 'DNI', '42198765', 'María Elena', 'García Torres', 'maria.garcia@hotmail.com', '987123456', '1988-08-22', true),
-(3, 'DNI', '43567891', 'Pedro José', 'López Mendoza', 'pedro.lopez@gmail.com', '978456123', '1995-03-10', true),
-(4, 'CEX', 'CE123456', 'Ana María', 'Rodríguez Silva', 'ana.rodriguez@gmail.com', '945678912', '1992-11-28', true),
-(5, 'DNI', '41234567', 'Carlos Alberto', 'Torres Vega', 'carlos.torres@hotmail.com', '956789123', '1987-07-14', true);
+-- Insercción de datos en la tabla Consultas
 
-/* Crear la tabla VENDEDOR */
-CREATE TABLE VENDEDOR(
-id int auto_increment primary key,
-tipo_documento char(3),
-numero_documento char(15),
-nombres varchar(60),
-apellidos varchar(90),
-salario decimal(8, 2),
-celular char(9),
-email varchar(80),
-activo bool
+INSERT INTO Queries (name, email, cellphone, message) VALUES
+('Luis', 'luis.huaraca.h@vallegrande.edu.pe', '912345123', 'Quisiera saber más sobre sus servicios'),
+('Kassandra', 'kassandra@gmai.com', '987654321', '¿Cuándo es la próxima promoción?'),
+('Alejandra', 'jennifer.cubillas.c@vallegrande.edu.pe','913441396', 'Estoy interesado en comprar un producto'),
+('María', 'amaria.sulca.h@vallegrande.edu.pe', '945678321', '¿Tienen servicio de entrega a domicilio?');
+
+
+
+
+
+-- Crear tabla Calendario
+
+CREATE TABLE calendar(
+identifier int auto_increment,
+nombre varchar(100),
+dia date,
+primary key (identifier)
 );
 
+-- Insercción de datos en la tabla calendario
 
--- Insertar datos en la tabla VENDEDOR
-INSERT INTO VENDEDOR (id, tipo_documento, numero_documento, nombres, apellidos, salario, celular, email, activo) VALUES
-(1, 'DNI', '40123456', 'Luis Miguel', 'Sánchez Díaz', 2500.00, '912345678', 'luis.sanchez@gamarramarket.com', true),
-(2, 'DNI', '41234567', 'Rosa María', 'Flores Campos', 2300.00, '923456789', 'rosa.flores@gamarramarket.com', true),
-(3, 'DNI', '42345678', 'Jorge Luis', 'Vargas Ruiz', 2400.00, '934567890', 'jorge.vargas@gamarramarket.com', true);
+INSERT INTO calendar (nombre, dia) Values
+('Día del Periodismo',(str_to_date('01/10/2024','%d/%m/%Y'))),
+('Día del Combate de Angamos',(str_to_date('08/10/2024','%d/%m/%Y'))),
+('Descubrimiento de América',(str_to_date('12/10/2024','%d/%m/%Y'))),
+('Día Mundial de la Alimentación',(str_to_date('16/10/2024','%d/%m/%Y'))),
+('Día Internacional para la Erradicación de la Pobreza',(str_to_date('17/10/2024','%d/%m/%Y'))),
+('Día Nacional de Ahorro de Energía ',(str_to_date('21/10/2024','%d/%m/%Y'))),
+('Día de la Canción Criolla', (str_to_date('31/10/2024','%d/%m/%Y'))),
+('Semana Nacional Forestal',(str_to_date('01/11/2024','%d/%m/%Y'))),
+('Semana de la Vida Animal',(str_to_date('04/11/2024','%d/%m/%Y'))),
+('Día de la Declaración Universal de los Derechos del Niño',(str_to_date('20/11/2024','%d/%m/%Y'))),
+('Navidad ',(str_to_date('25/12/2024','%d/%m/%Y')));
 
+-- Consultar los datos registrados en la tabla Calendario
 
-/* Crear la tabla PRENDA */
-CREATE TABLE PRENDA(
-id int auto_increment primary key,
-descripcion varchar(90),
-marca varchar(60),
-cantidad int,
-talla varchar(10),
-precio decimal(8, 2),
-activo bool
-);
+SELECT * FROM calendar;
 
--- Insertar datos en la tabla PRENDA
-INSERT INTO PRENDA (id, descripcion, marca, cantidad, talla, precio, activo) VALUES
-(1, 'Pantalón Jean Clásico', 'Levis', 50, '32', 89.90, true),
-(2, 'Camisa Manga Larga', 'Newport', 30, 'M', 59.90, true),
-(3, 'Polo Cuello Redondo', 'Adidas', 45, 'L', 45.90, true),
-(4, 'Vestido Casual', 'Zara', 25, 'S', 79.90, true),
-(5, 'Casaca Deportiva', 'Nike', 20, 'XL', 129.90, true),
-(6, 'Falda Plisada', 'H&M', 35, 'M', 69.90, true);
+-- Consultar los datos registrados en la tabla Consultas
 
+SELECT * FROM Queries;
 
-/* Crear la tabla VENTA */
-CREATE TABLE VENTA(
-id int auto_increment primary key,
-fecha_hora timestamp,
-activo bool,
-cliente_id int,
-vendedor_id int,
-foreign key (cliente_id) references CLIENTE(id),
-foreign key (vendedor_id) references VENDEDOR(id)
-);
+-- Consultar los eventos que coincidan con una fecha específica
 
--- Insertar datos en la tabla VENTA
-INSERT INTO VENTA (id, fecha_hora, activo, cliente_id, vendedor_id) VALUES
-(1, '2024-01-15 10:30:00', true, 1, 1),
-(2, '2024-01-15 11:45:00', true, 2, 1),
-(3, '2024-01-16 09:15:00', true, 3, 2),
-(4, '2024-01-16 14:20:00', true, 4, 3),
-(5, '2024-01-17 16:30:00', true, 5, 2);
+SELECT nombre,DATE_FORMAT(dia,'%d/%m/%Y') AS dia FROM calendar where dia = '2024-10-16';
 
+-- Tablas
 
-/* Crear la tabla VENTA DETALLE */
-
-CREATE TABLE VENTA_DETALLE(
-id int auto_increment primary key,
-cantidad int,
-venta_id int,
-prenda_id int,
-foreign key (venta_id) references VENTA(id),
-foreign key (prenda_id) references PRENDA(id)
-);
-
-
--- Insertar datos en la tabla VENTA_DETALLE
-INSERT INTO VENTA_DETALLE (id, cantidad, venta_id, prenda_id) VALUES
-(1, 2, 1, 1),  -- 2 pantalones jean
-(2, 1, 1, 2),  -- 1 camisa
-(3, 3, 2, 3),  -- 3 polos
-(4, 1, 3, 4),  -- 1 vestido
-(5, 2, 3, 5),  -- 2 casacas
-(6, 1, 4, 6),  -- 1 falda
-(7, 1, 4, 2),  -- 1 camisa
-(8, 2, 5, 1),  -- 2 pantalones jean
-(9, 1, 5, 3);  -- 1 polo
-
-/*SELECION DE TABLAS*/
-
--- tabla cliente
-SELECT * FROM CLIENTE;
-
--- tabla prenda
-SELECT * FROM PRENDA;
-
--- tabla vendedor
-SELECT * FROM VENDEDOR;
-
--- tabla venta
-SELECT * FROM VENTA;
-
--- tabla venta detalle
-SELECT * FROM VENTA_DETALLE;
+Show tables;
