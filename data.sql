@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS venta_detalle (
     cantidad INT NOT NULL
 );
 
-/* Insertar datos en CLIENTE */
+
 /* Insertar registros en la tabla CLIENTE */
 INSERT INTO cliente 
 (tipo_documento, numero_documento, nombres, apellidos, email, celular, fecha_nacimiento, activo)
@@ -205,7 +205,7 @@ INSERT INTO venta_detalle (venta_id, prenda_id, cantidad) VALUES
 (3, 2, 6), (3, 5, 7), (4, 2, 4),
 (4, 5, 3);
 
-/* Actualizaciones solicitadas */
+
 
 -- Actualizar celular de Mario Rodríguez Mayo
 UPDATE cliente 
